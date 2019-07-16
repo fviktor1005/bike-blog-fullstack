@@ -3,9 +3,9 @@ import { Form as FinalForm } from "react-final-form";
 import NewPost from "./new-post";
 import { POSTS_SERVICE } from "Modules/posts";
 
-class NewPostConttoller extends PureComponent {
+class NewPostController extends PureComponent {
   onSubmit = values => {
-    POSTS_SERVICE.create({ ...values, tags: values.tags.split(",") }).then(() =>
+    POSTS_SERVICE.create({ ...values, tags: (values.tags || '').split(",") }).then(() =>
       this.props.history.push("/")
     );
   };
@@ -23,4 +23,4 @@ class NewPostConttoller extends PureComponent {
   }
 }
 
-export default NewPostConttoller;
+export default NewPostController;
