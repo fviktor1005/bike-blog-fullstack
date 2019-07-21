@@ -76,15 +76,16 @@ router.get('/:from/:to', async (req, res) => {
     res.send({posts, count});
 });
 
-router.put('/', async (req, res) => {
+router.put('/:id', withUser, async (req, res) => {
+    const { id } = req.params;
     let result;
-    const newPost = new Post({...req.body});
     try {
-        result = await newPost.save();
+        result = await Post.findOneAndUpdate({_id: id}, {$set: {...req.body}});
     } catch (e) {
-        res.send(e)
+        res.status(500).send(e);
     }
-    res.send(result);
+
+    res.send({...result, ...req.body});
 });
 
 router.post('/', withUser, async (req, res) => {

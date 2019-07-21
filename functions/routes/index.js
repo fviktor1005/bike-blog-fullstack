@@ -4,7 +4,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 mongoose
-  .connect(config.connectString, { useNewUrlParser: true })
+  .connect(process.env.CONN_STRING || config.connectString, { useNewUrlParser: true })
   .then(() => console.log("connected to goose!"))
   .catch(e => console.error(e));
 

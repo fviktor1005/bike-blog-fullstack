@@ -3,6 +3,7 @@ import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import Main from "./main";
 import { POSTS_ACTIONS, PostSelectors } from "Modules/posts";
+import { getLogin } from "Modules/auth";
 import {
   getCurrentPosts,
   getPagesCount,
@@ -29,6 +30,7 @@ class MainController extends PureComponent {
 }
 
 const mapStateToProps = createStructuredSelector({
+  login: getLogin,
   Ids: getPagePostIDs,
   authors: PostSelectors.getAuthors,
   posts: getCurrentPosts,
